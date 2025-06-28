@@ -1,0 +1,18 @@
+# bug_bot.py
+import ast
+import sys
+
+def find_bugs(file_path):
+    try:
+        with open(file_path, 'r') as f:
+            code = f.read()
+        tree = ast.parse(code)
+        print(f"No syntax errors found in {file_path}")
+    except SyntaxError as e:
+        print(f"[BUG DETECTED] SyntaxError in {file_path}: {e}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python bug_bot.py <python_file>")
+    else:
+        find_bugs(sys.argv[1])
